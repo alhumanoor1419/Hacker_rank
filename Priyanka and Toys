@@ -1,0 +1,36 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+
+def toys(w):
+    w.sort()
+    n=len(w)
+    containers =0
+    i = 0
+    while i<n:
+        containers +=1
+        limit = w[i]+4
+        while i<n and w[i]<=limit:
+            i+=1
+    return containers
+n=8
+weights = [1, 2, 3, 21, 7, 12, 14, 21]
+print(toys(weights))  
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input().strip())
+
+    w = list(map(int, input().rstrip().split()))
+
+    result = toys(w)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()

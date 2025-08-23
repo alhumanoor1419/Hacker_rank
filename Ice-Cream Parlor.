@@ -1,0 +1,21 @@
+def icecreamParlor(m, cost):
+    # Dictionary to store cost and its corresponding index
+    price_map = {}
+
+    for i, price in enumerate(cost):
+        complement = m - price
+        if complement in price_map:
+            # Return 1-based indices in ascending order
+            return sorted([price_map[complement] + 1, i + 1])
+        price_map[price] = i
+
+# Main logic to read input and process multiple trips
+if __name__ == '__main__':
+    t = int(input())  # Number of trips
+    for _ in range(t):
+        m = int(input())  # Total money pooled
+        n = int(input())  # Number of ice cream flavors
+        cost = list(map(int, input().strip().split()))  # List of flavor costs
+
+        result = icecreamParlor(m, cost)
+        print(*result)

@@ -1,0 +1,27 @@
+def minimumLoss(price):
+    n = len(price)
+    # Create a dictionary to store the original indices of prices
+    price_index = {p: i for i, p in enumerate(price)}
+    
+    # Sort the prices in descending order
+    sorted_prices = sorted(price, reverse=True)
+    
+    min_loss = float('inf')
+    
+    # Check adjacent prices in the sorted list
+    for i in range(1, n):
+        high = sorted_prices[i-1]
+        low = sorted_prices[i]
+        
+        # Ensure that we buy before we sell
+        if price_index[high] < price_index[low]:
+            min_loss = min(min_loss, high - low)
+    
+    return min_loss
+
+# Sample Input
+n = int(input())  # Number of years
+prices = list(map(int, input().split()))  # Prices for each year
+
+# Output the minimum loss
+print(minimumLoss(prices))

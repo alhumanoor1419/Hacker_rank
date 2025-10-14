@@ -1,0 +1,27 @@
+#!/bin/python3
+
+import sys
+import threading
+
+def substrings(n: str) -> int:
+    MOD = 10**9 + 7
+    # f_prev = sum of substring-values that end at the previous position
+    f_prev = int(n[0])
+    total = f_prev
+
+    for i in range(1, len(n)):
+        digit = int(n[i])
+        # recurrence: f[i] = f[i-1] * 10 + (i+1) * digit
+        f_i = ( (f_prev * 10) % MOD + (i + 1) * digit ) % MOD
+        total = ( total + f_i ) % MOD
+        f_prev = f_i
+
+    return total
+
+def main():
+    n = sys.stdin.readline().strip()
+    ans = substrings(n)
+    print(ans)
+
+if __name__ == "__main__":
+    main()

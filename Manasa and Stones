@@ -1,0 +1,21 @@
+def stones(n: int, a: int, b: int):
+    results = set()
+    steps = n - 1
+    for x in range(0, steps + 1):
+        value = x * a + (steps - x) * b
+        results.add(value)
+    return sorted(results)
+
+if __name__ == "__main__":
+    import sys
+    input_data = sys.stdin.read().strip().split()
+    t = int(input_data[0])
+    idx = 1
+    out_lines = []
+    for _ in range(t):
+        n = int(input_data[idx]); idx += 1
+        a = int(input_data[idx]); idx += 1
+        b = int(input_data[idx]); idx += 1
+        ans = stones(n, a, b)
+        out_lines.append(" ".join(str(v) for v in ans))
+    sys.stdout.write("\n".join(out_lines))

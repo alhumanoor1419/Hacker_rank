@@ -1,0 +1,55 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'anagram' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts STRING s as parameter.
+#
+
+def anagram(s):
+    n = len(s)
+    
+    if n % 2 != 0:
+        return -1
+    
+    mid = n // 2
+    s1 = s[:mid]
+    s2 = s[mid:]
+    
+    freq1 = {}
+    freq2 = {}
+    
+    for ch in s1:
+        if ch in freq1:
+            freq1[ch] += 1
+        else:
+            freq1[ch] = 1
+
+    for ch in s2:
+        if ch in freq2:
+            freq2[ch] += 1
+        else:
+            freq2[ch] = 1
+
+    changes = 0
+    for ch in freq1:
+        c1 = freq1.get(ch, 0)
+        c2 = freq2.get(ch, 0)
+        if c1 > c2:
+            changes += (c1 - c2)
+
+    return changes
+
+
+if __name__ == "__main__":
+    t = int(input().strip())
+    for _ in range(t):
+        s = input().strip()
+        print(anagram(s))

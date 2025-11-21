@@ -1,0 +1,47 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'happyLadybugs' function below.
+#
+# The function is expected to return a STRING.
+# The function accepts STRING b as parameter.
+#
+
+def happyLadybugs(b):
+    # manual frequency count
+    freq = {}
+    for ch in b:
+        if ch in freq:
+            freq[ch] += 1
+        else:
+            freq[ch] = 1
+
+    # Case 1: no underscore
+    if "_" not in b:
+        for i in range(len(b)):
+            left_same = (i > 0 and b[i] == b[i - 1])
+            right_same = (i < len(b) - 1 and b[i] == b[i + 1])
+            if not (left_same or right_same):
+                return "NO"
+        return "YES"
+
+    # Case 2: underscore exists
+    for color in freq:
+        if color != "_" and freq[color] == 1:
+            return "NO"
+
+    return "YES"
+
+
+if __name__ == "__main__":
+    g = int(input().strip())
+    for _ in range(g):
+        n = int(input().strip())
+        b = input().strip()
+        print(happyLadybugs(b))
